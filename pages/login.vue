@@ -3,18 +3,18 @@ import type { FormError } from "@nuxt/ui/dist/runtime/types";
 
 const user = useSupabaseUser();
 const { auth } = useSupabaseClient();
-
+const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`;
 const state = ref({
   email: undefined,
   password: undefined,
 });
+
 function validate(state: any): FormError[] {
   const errors = [];
   if (!state.email) errors.push({ path: "email", message: "Required" });
   if (!state.password) errors.push({ path: "password", message: "Required" });
   return errors;
 }
-
 async function signInWithEmail(form: any) {
   console.log(form);
   const { data, error } = await auth.signInWithPassword({
@@ -51,6 +51,15 @@ watch(
         </UFormGroup>
         <UButton type="submit"> Submit </UButton>
       </UForm>
+      <UButton
+        class="mt-3"
+        block
+        label="Google"
+        color="gray"
+        @click="
+          auth.signInWithOAuth({ provider: 'google', options: { redirectTo } })
+        "
+      />
     </div>
   </div>
 </template>
