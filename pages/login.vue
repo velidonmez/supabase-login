@@ -3,7 +3,7 @@ import type { FormError } from "@nuxt/ui/dist/runtime/types";
 
 const user = useSupabaseUser();
 const { auth } = useSupabaseClient();
-const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`;
+const redirectTo = `http://localhost:3000/confirm`;
 const state = ref({
   email: undefined,
   password: undefined,
