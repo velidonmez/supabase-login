@@ -4,7 +4,7 @@ const user = useSupabaseUser();
 watch(
   user,
   () => {
-    if (user.value) return navigateTo("/tasks");
+    if (user.value) return navigateTo("/");
   },
   { immediate: true },
 );
